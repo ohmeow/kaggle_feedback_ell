@@ -1,4 +1,4 @@
 website:
   sidebar:
     contents:
-      - 01_utils.ipynb
+      - 00_utils.ipynb
