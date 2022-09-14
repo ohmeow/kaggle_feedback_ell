@@ -39,9 +39,6 @@ def detect_env():
 
 run_env = detect_env()
 
-if run_env != "kaggle":
-    from kaggle import api
-
 
 # %% ../nbs/00_utils.ipynb 11
 def print_dev_environment():
@@ -110,6 +107,8 @@ def setup_comp(override_project_root=None, comp_data_path_override=None):
         _, comp_data_path, *_ = get_paths(override_project_root)
 
     if run_env != "kaggle":
+        from kaggle import api
+        
         if not comp_data_path.exists() or not any(comp_data_path.iterdir()):
             import zipfile
 
