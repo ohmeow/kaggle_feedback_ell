@@ -12,13 +12,15 @@ from torch.nn import functional as F
 from fastai.losses import CrossEntropyLossFlat
 from fastai.test_utils import show_install
 
+
 # %% auto 0
 __all__ = ['default_seed', 'kaggle_comp', 'run_env', 'detect_env', 'print_dev_environment', 'get_paths', 'setup_comp',
            'comp_metric_score', 'get_run_id']
 
 # %% ../nbs/00_utils.ipynb 7
 default_seed = int(os.getenv("RANDOM_SEED", 42))
-kaggle_comp = os.getenv("KAGGLE_COMP","feedback-prize-english-language-learning")
+kaggle_comp = os.getenv("KAGGLE_COMP", "feedback-prize-english-language-learning")
+
 
 # %% ../nbs/00_utils.ipynb 9
 def detect_env():
@@ -27,7 +29,7 @@ def detect_env():
         run_env = "kaggle"
     elif os.path.isdir("/content"):
         run_env = "colab"
-    elif os.path.isdir("../nbs") or  os.path.isdir("../../nbs"):
+    elif os.path.isdir("../nbs") or os.path.isdir("../../nbs"):
         run_env = "local_nb"
     else:
         run_env = "script"
@@ -40,17 +42,19 @@ run_env = detect_env()
 if run_env != "kaggle":
     from kaggle import api
 
+
 # %% ../nbs/00_utils.ipynb 11
 def print_dev_environment():
     """Provides details on your development environment including packages installed, cuda/cudnn availability, GPUs, etc."""
     print(show_install())
+
 
 # %% ../nbs/00_utils.ipynb 14
 def get_paths(override_project_root=None):
     """Returns data, models, and log folder paths based on your where you are running the code"""
     if run_env == "kaggle":
         data_path = Path(".")
-        comp_data_path = clean_data_path= Path(f"../input/{kaggle_comp}")
+        comp_data_path = clean_data_path = Path(f"../input/{kaggle_comp}")
         working_path = Path("/kaggle/working")
         models_path = working_path / "models"
         logs_path = working_path / "logs"
@@ -66,11 +70,11 @@ def get_paths(override_project_root=None):
     elif run_env == "local_nb":
         proj_root_path = override_project_root or Path("..")
 
-        data_path = Path(proj_root_path/"data")
+        data_path = Path(proj_root_path / "data")
         comp_data_path = data_path / "comp"
         clean_data_path = data_path / "clean"
-        models_path = Path(proj_root_path/"models")
-        logs_path = Path(proj_root_path/"logs")
+        models_path = Path(proj_root_path / "models")
+        logs_path = Path(proj_root_path / "logs")
 
         comp_data_path.mkdir(parents=True, exist_ok=True)
         clean_data_path.mkdir(parents=True, exist_ok=True)
@@ -78,11 +82,11 @@ def get_paths(override_project_root=None):
     elif run_env == "script":
         proj_root_path = override_project_root or Path(".")
 
-        data_path = Path(proj_root_path/"data")
+        data_path = Path(proj_root_path / "data")
         comp_data_path = data_path / "comp"
         clean_data_path = data_path / "clean"
-        models_path = Path(proj_root_path/"models")
-        logs_path = Path(proj_root_path/"logs")
+        models_path = Path(proj_root_path / "models")
+        logs_path = Path(proj_root_path / "logs")
 
         comp_data_path.mkdir(parents=True, exist_ok=True)
         clean_data_path.mkdir(parents=True, exist_ok=True)
@@ -92,8 +96,9 @@ def get_paths(override_project_root=None):
         logs_path.mkdir(parents=True, exist_ok=True)
     except:
         print("Unable to create models and logs folders")
-        
+
     return data_path, comp_data_path, clean_data_path, models_path, logs_path
+
 
 # %% ../nbs/00_utils.ipynb 15
 def setup_comp(override_project_root=None, comp_data_path_override=None):
@@ -117,6 +122,7 @@ def setup_comp(override_project_root=None, comp_data_path_override=None):
     else:
         return Path(f"../input/{kaggle_comp}")
 
+
 # %% ../nbs/00_utils.ipynb 18
 def comp_metric_score(preds, targs):
     """This competition is evaluated using "multi-class logarithmic loss" (e.g., cross-entropy loss). Expects numpy arrays."""
@@ -126,7 +132,9 @@ def comp_metric_score(preds, targs):
     nll = -np.log(correct_class_probs)
     return nll.mean()
 
+
 # %% ../nbs/00_utils.ipynb 23
 def get_run_id():
     run_id = str(datetime.datetime.now())[:16].replace(":", "_").replace(" ", "_").replace("-", "_")
     return run_id
+
