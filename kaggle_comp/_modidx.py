@@ -5,4 +5,9 @@ d = { 'settings': { 'branch': 'master',
                 'doc_host': 'https://ohmeow.github.io',
                 'git_url': 'https://github.com/ohmeow/kaggle_feedback_ell',
                 'lib_path': 'kaggle_comp'},
-  'syms': {'kaggle_comp.core': {'kaggle_comp.core.testing': ('core.html#testing', 'kaggle_comp/core.py')}}}
+  'syms': { 'kaggle_comp.utils': { 'kaggle_comp.utils.comp_metric_score': ('utils.html#comp_metric_score', 'kaggle_comp/utils.py'),
+                                   'kaggle_comp.utils.detect_env': ('utils.html#detect_env', 'kaggle_comp/utils.py'),
+                                   'kaggle_comp.utils.get_paths': ('utils.html#get_paths', 'kaggle_comp/utils.py'),
+                                   'kaggle_comp.utils.get_run_id': ('utils.html#get_run_id', 'kaggle_comp/utils.py'),
+                                   'kaggle_comp.utils.print_dev_environment': ('utils.html#print_dev_environment', 'kaggle_comp/utils.py'),
+                                   'kaggle_comp.utils.setup_comp': ('utils.html#setup_comp', 'kaggle_comp/utils.py')}}}

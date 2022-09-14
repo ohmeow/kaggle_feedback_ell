@@ -155,3 +155,6 @@ checklink/cookies.txt
 
 # app specific additions
 .pre-commit-config.yaml
+/data
+/logs
+/models
