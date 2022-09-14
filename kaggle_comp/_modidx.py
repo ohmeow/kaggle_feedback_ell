@@ -4,5 +4,5 @@ d = { 'settings': { 'branch': 'master',
                 'doc_baseurl': '/kaggle_feedback_ell',
                 'doc_host': 'https://ohmeow.github.io',
                 'git_url': 'https://github.com/ohmeow/kaggle_feedback_ell',
-                'lib_path': 'kaggle_feedback_ell'},
-  'syms': {'kaggle_feedback_ell.core': {'kaggle_feedback_ell.core.foo': ('core.html#foo', 'kaggle_feedback_ell/core.py')}}}
+                'lib_path': 'kaggle_comp'},
+  'syms': {'kaggle_comp.core': {'kaggle_comp.core.testing': ('core.html#testing', 'kaggle_comp/core.py')}}}
