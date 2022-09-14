@@ -16,7 +16,7 @@ format:
 
 website:
   title: "kaggle_comp"
-  site-url: "https://ohmeow.github.io/kaggle_feedback_ell"
+  site-url: "https://ohmeow.github.io/kaggle_comp"
   description: "Our team repo for the Kaggle Feedback Prize - English Language Learning comptition"
   twitter-card: true
   open-graph: true
