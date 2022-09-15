@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "utils.html",
+    "href": "utils.html",
+    "title": "utils",
+    "section": "",
+    "text": "Application wide defaults go here"
+  },
+  {
+    "objectID": "utils.html#development-environment",
+    "href": "utils.html#development-environment",
+    "title": "utils",
+    "section": "Development environment",
+    "text": "Development environment\nInformation about where your code is running and your compute capabilities\n\nsource\n\ndetect_env\n\n detect_env ()\n\nA helper function that detects where you are running code\n\nprint(run_env)\n\nlocal_nb\n\n\n\nsource\n\n\nprint_dev_environment\n\n print_dev_environment ()\n\nProvides details on your development environment including packages installed, cuda/cudnn availability, GPUs, etc.\n\nprint_dev_environment()"
+  },
+  {
+    "objectID": "utils.html#competition-setup",
+    "href": "utils.html#competition-setup",
+    "title": "utils",
+    "section": "Competition Setup",
+    "text": "Competition Setup\nNOTE: The first thing you should run when setting things up after you’ve deinfed your kaggle_comp, is setup_comp(). This method will ensure all the necessary folders are created as well as download the competition data if necessary.\n\nsource\n\nget_paths\n\n get_paths (override_project_root=None)\n\nReturns data, models, and log folder paths based on your where you are running the code\n\nsource\n\n\nsetup_comp\n\n setup_comp (override_project_root=None, comp_data_path_override=None)\n\nEnsures that the expected data, models, and logs folders exist and that the competition data exists in the ‘comp_data_path’.\n\nsetup_comp()\n\nPath('../data/comp')"
+  },
+  {
+    "objectID": "utils.html#competition-metrics",
+    "href": "utils.html#competition-metrics",
+    "title": "utils",
+    "section": "Competition Metrics",
+    "text": "Competition Metrics\nThis competition is evaluated using “multi-class logarithmic loss” (e.g., cross-entropy loss). From the competition website …\n\nEach row in the dataset has been labeled with one true effectiveness label. For each row, you must submit the predicted probabilities that the product belongs to each quality label.\n\n\nsource\n\ncomp_metric_score\n\n comp_metric_score (preds, targs)\n\nThis competition is evaluated using “multi-class logarithmic loss” (e.g., cross-entropy loss). Expects numpy arrays.\nVerify our comp_metric_score calculates cross-entropy loss correctly\n\npreds = torch.randn(3, 5)\ntargets = torch.tensor([0, 3, 4])\n\nprint(preds)\nprint(targets)\n\ntensor([[ 2.1897,  0.4049,  0.4013,  0.3084,  2.3549],\n        [ 0.8280, -0.0217, -0.4138,  0.3544,  1.8640],\n        [-0.4228, -0.0550,  0.7587, -1.7377, -0.1868]])\ntensor([0, 3, 4])\n\n\n\npytorch_loss = F.cross_entropy(preds, targets)\nfastai_loss = CrossEntropyLossFlat()(preds, targets)\nnp_loss = comp_metric_score(preds.numpy(), targets.numpy())\n\n# test_close(pytorch_loss.item(), fastai_loss.item())\n# test_close(pytorch_loss.item(), np_loss)\n\npytorch_loss, fastai_loss, np_loss\n\n(tensor(1.6128), TensorBase(1.6128), 1.6128138)"
+  },
+  {
+    "objectID": "utils.html#other-utilities",
+    "href": "utils.html#other-utilities",
+    "title": "utils",
+    "section": "Other utilities",
+    "text": "Other utilities\n\nsource\n\nget_run_id\n\n get_run_id ()\n\n\nprint(get_run_id())\n\n2022_09_13_23_10"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "kaggle_comp",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "kaggle_comp",
+    "section": "Install",
+    "text": "Install\npip install kaggle_comp"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "kaggle_comp",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2"
+  }
+]
