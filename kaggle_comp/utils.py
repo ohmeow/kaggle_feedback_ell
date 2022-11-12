@@ -8,14 +8,19 @@ from pathlib import Path
 
 import numpy as np
 import torch
+from torch import nn
 from torch.nn import functional as F
 from fastai.losses import CrossEntropyLossFlat
 from fastai.test_utils import show_install
+from sklearn.metrics import mean_squared_error
+
+from fastai.metrics import rmse, AccumMetric
+from fastcore.test import *
 
 
 # %% auto 0
 __all__ = ['default_seed', 'kaggle_comp', 'run_env', 'detect_env', 'print_dev_environment', 'get_paths', 'setup_comp',
-           'comp_metric_score', 'get_run_id']
+           'comp_metric_score', 'MCRMSE', 'RMSELoss_0', 'MCRMSELoss', 'rev_phrase', 'CompTrainer', 'get_run_id']
 
 # %% ../nbs/00_utils.ipynb 7
 default_seed = int(os.getenv("RANDOM_SEED", 42))
@@ -124,15 +129,70 @@ def setup_comp(override_project_root=None, comp_data_path_override=None):
 
 # %% ../nbs/00_utils.ipynb 18
 def comp_metric_score(preds, targs):
-    """This competition is evaluated using "multi-class logarithmic loss" (e.g., cross-entropy loss). Expects numpy arrays."""
-    probs = np.exp(preds) / np.sum(np.exp(preds), axis=1, keepdims=True)
+    """This competition is evaluated using "columnwise root mean squared error". Expects numpy arrays."""
+    len_target_cols = targs.shape[1]
+    score = [0] * len_target_cols
+    for i in range(len_target_cols):
+        score[i] = np.sqrt(mean_squared_error(preds[:, i], targs[:, i]))
+    return np.mean(score)
 
-    correct_class_probs = probs[range(len(preds)), targs]
-    nll = -np.log(correct_class_probs)
-    return nll.mean()
+# %% ../nbs/00_utils.ipynb 19
+def MCRMSE(dim_argmax=None, **kwargs):
+    "columnwise root mean squared error for regression problem"
+    def mcrmse(x,y): return comp_metric_score(x.cpu().numpy(),y.cpu().numpy())
+    return AccumMetric(mcrmse, invert_arg=False, flatten=False, dim_argmax=dim_argmax, **kwargs)
+
+# %% ../nbs/00_utils.ipynb 27
+class RMSELoss_0(nn.Module):
+    def __init__(self, eps=1e-6):
+        super().__init__()
+        self.mse = nn.MSELoss()
+        self.eps = eps
+
+    def forward(self, yhat, y):
+        loss = torch.sqrt(self.mse(yhat, y) + self.eps)
+        return loss
 
 
-# %% ../nbs/00_utils.ipynb 23
+class MCRMSELoss(nn.Module):
+    def __init__(self, num_scored=6):
+        super().__init__()
+        self.rmse = RMSELoss_0()
+        self.num_scored = num_scored
+
+    def forward(self, yhat, y):
+        score = 0
+        for i in range(self.num_scored):
+            score += self.rmse(yhat[:, i], y[:, i]) / self.num_scored
+
+        return score
+
+# %% ../nbs/00_utils.ipynb 29
+def rev_phrase(foo: str):
+    return " ".join(foo.split()[::-1])
+
+# %% ../nbs/00_utils.ipynb 32
+class CompTrainer(abc.ABC):
+    def __init__(self, train_config, model_name, model_output_path="models", log_output_path="logs", **kwargs):
+        self.train_config = train_config
+        self.model_name = model_name
+        self.model_output_path = Path(model_output_path)
+        self.log_output_path = Path(log_output_path)
+
+    @abc.abstractmethod
+    def train(self, CFG, data, experiment_name=None , n_fold=5, run_id=-1, grid_id=-1, seed=None, verbose: bool = True):
+        pass
+
+    @abc.abstractmethod
+    def predict(self, model_name, data):
+        pass
+
+    def get_value_for(self, attr, CFG, default):
+        val = getattr(CFG, attr, None)
+        return val if val is not None else self.train_config.get(attr, default)
+
+
+# %% ../nbs/00_utils.ipynb 34
 def get_run_id():
     run_id = str(datetime.datetime.now())[:16].replace(":", "_").replace(" ", "_").replace("-", "_")
     return run_id
