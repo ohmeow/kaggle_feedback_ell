@@ -439,6 +439,7 @@ class FastaiCompTrainer(utils.CompTrainer):
         log_df["subset"] = CFG.subset
         log_df["seed"] = seed
         log_df["batch_size"] = batch_size
+        log_df["max_length"] = max_length
         log_df["n_frozen_epochs"] = n_frozen_epochs
         log_df["frozen_lr"] = frozen_lr
         log_df["n_unfrozen_epochs"] = n_unfrozen_epochs
