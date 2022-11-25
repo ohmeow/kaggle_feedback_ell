@@ -291,6 +291,110 @@ experiments = {
         "n_unfrozen_epochs": 10,
         "unfrozen_lrs": [1e-6, 2e-5],
     },
+    # deberta
+    "blurr_deberta_xlarge": {
+        "comp_trainer_cls": fastai.FastaiCompTrainer,
+        # hf objects
+        "model_checkpoint": "microsoft/deberta-xlarge",
+         "hf_config_kwargs": {
+            "num_labels": 6,
+            "cls_dropout": 0.15,  # default = hidden_dropout_prob
+            "pooler_dropout": 0.00,  # default = 0.0
+            "hidden_dropout_prob": 0.1,  # default = 0.1
+            "attention_probs_dropout_prob": 0.1,  # default = 0.1
+            "layer_norm_eps": 1e-7 # default = 1e-7
+        },
+        "hf_tokenizer_kwargs": {},
+        # data
+        "anchor_col": "anchor",
+        "target_col": "target",
+        "max_length": 140,
+        "include_labels": True,
+        "tok_kwargs": {},
+        "batch_size": 8,
+        # learner
+        "adam_beta1": 0.9,
+        "adam_beta2": 0.999,
+        "adam_eps": 1e-6,
+        "weight_decay": 0.01,
+        "max_grad_norm": 1.0,
+        "save_best_model": True,
+        "use_fp16": True,
+        # training
+        "n_frozen_epochs": 0,
+        "frozen_lr": None,
+        "n_unfrozen_epochs": 10,
+        "unfrozen_lrs": [1e-6, 2e-5],
+    },
+    # deberta
+    "blurr_deberta_large_mnli": {
+        "comp_trainer_cls": fastai.FastaiCompTrainer,
+        # hf objects
+        "model_checkpoint": "microsoft/deberta-large-mnli",
+         "hf_config_kwargs": {
+            "num_labels": 6,
+            "cls_dropout": 0.15,  # default = hidden_dropout_prob
+            "pooler_dropout": 0.00,  # default = 0.0
+            "hidden_dropout_prob": 0.1,  # default = 0.1
+            "attention_probs_dropout_prob": 0.1,  # default = 0.1
+            "layer_norm_eps": 1e-7 # default = 1e-7
+        },
+        "hf_tokenizer_kwargs": {},
+        # data
+        "anchor_col": "anchor",
+        "target_col": "target",
+        "max_length": 140,
+        "include_labels": True,
+        "tok_kwargs": {},
+        "batch_size": 8,
+        # learner
+        "adam_beta1": 0.9,
+        "adam_beta2": 0.999,
+        "adam_eps": 1e-6,
+        "weight_decay": 0.01,
+        "max_grad_norm": 1.0,
+        "save_best_model": True,
+        "use_fp16": True,
+        # training
+        "n_frozen_epochs": 0,
+        "frozen_lr": None,
+        "n_unfrozen_epochs": 10,
+        "unfrozen_lrs": [1e-6, 2e-5],
+    },
+    "blurr_deberta_xlarge_mnli": {
+        "comp_trainer_cls": fastai.FastaiCompTrainer,
+        # hf objects
+        "model_checkpoint": "microsoft/deberta-xlarge-mnli",
+         "hf_config_kwargs": {
+            "num_labels": 6,
+            "cls_dropout": 0.15,  # default = hidden_dropout_prob
+            "pooler_dropout": 0.00,  # default = 0.0
+            "hidden_dropout_prob": 0.1,  # default = 0.1
+            "attention_probs_dropout_prob": 0.1,  # default = 0.1
+            "layer_norm_eps": 1e-7 # default = 1e-7
+        },
+        "hf_tokenizer_kwargs": {},
+        # data
+        "anchor_col": "anchor",
+        "target_col": "target",
+        "max_length": 140,
+        "include_labels": True,
+        "tok_kwargs": {},
+        "batch_size": 8,
+        # learner
+        "adam_beta1": 0.9,
+        "adam_beta2": 0.999,
+        "adam_eps": 1e-6,
+        "weight_decay": 0.01,
+        "max_grad_norm": 1.0,
+        "save_best_model": True,
+        "use_fp16": True,
+        # training
+        "n_frozen_epochs": 0,
+        "frozen_lr": None,
+        "n_unfrozen_epochs": 10,
+        "unfrozen_lrs": [1e-6, 2e-5],
+    },
     "blurr_deberta_large_custom_head": {
         "comp_trainer_cls": fastai.FastaiCompTrainer,
         # hf objects
