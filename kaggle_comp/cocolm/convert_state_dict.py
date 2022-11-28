@@ -20,11 +20,13 @@ def get_checkpoint_from_transformer_cache(
     proxies,
     resume_download,
 ):
+    filename = "pytorch_model.bin"
+
     try:
 
         resolved_archive_file = hf_hub_download(
             repo_id=pretrained_model_name_or_path,
-            filename="pytorch_model.bin",
+            filename=filename,
             cache_dir=cache_dir,
             force_download=force_download,
             resume_download=resume_download,
@@ -49,9 +51,9 @@ def get_checkpoint_from_transformer_cache(
             )
         raise EnvironmentError(msg)
 
-    if resolved_archive_file == archive_file:
-        logger.info("loading weights file {}".format(archive_file))
-    else:
-        logger.info("loading weights file {} from cache at {}".format(archive_file, resolved_archive_file))
+    # if resolved_archive_file == archive_file:
+    #     logger.info("loading weights file {}".format(archive_file))
+    # else:
+    #     logger.info("loading weights file {} from cache at {}".format(archive_file, resolved_archive_file))
 
     return torch.load(resolved_archive_file, map_location="cpu")

@@ -43,7 +43,7 @@ def run_fold(
         train_df = train_data.copy()
     else:
         train_df = pd.read_csv(train_data)
-    
+
     train_df["is_valid"] = train_df["k_fold"] == n_fold
 
     log_df, oof_df = comp_trainer.train(
