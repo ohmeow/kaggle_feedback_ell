@@ -878,10 +878,10 @@ experiments = {
         "model_checkpoint": "microsoft/cocolm-large",
         "hf_config_kwargs": {
             "num_labels": 6,
-            "hidden_dropout_prob": 0.1, # default = 0.1
+            "hidden_dropout_prob": 0.125, # default = 0.1
             "attention_probs_dropout_prob": 0.1, # default = 0.1
             "summary_type": "first", # default = "first"
-            "summary_last_dropout": 0.1, # default = 0.1
+            "summary_last_dropout": 0.15, # default = 0.1
         },
         "hf_tokenizer_kwargs": {},
         # data
@@ -890,7 +890,7 @@ experiments = {
         "max_length": 512,
         "include_labels": False,
         "tok_kwargs": {},
-        "batch_size": 128,
+        "batch_size": 8,
         # learner
         "adam_beta1": 0.9,
         "adam_beta2": 0.999,
@@ -902,8 +902,8 @@ experiments = {
         # training
         "n_frozen_epochs": 0,
         "frozen_lr": None,
-        "n_unfrozen_epochs": 10,
-        "unfrozen_lrs": [3e-6, 5e-5],
+        "n_unfrozen_epochs": 4,
+        "unfrozen_lrs": [5e-6, 5e-4],
     },
     # "blurr_cocolm_large_custom_head": {
     #     "comp_trainer_cls": fastai_cocolm.FastaiCocoLmCompTrainer,
