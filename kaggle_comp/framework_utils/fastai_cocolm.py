@@ -43,9 +43,9 @@ def get_comp_hf_objects(
 
     # need to create configuration object separately because we may be adding new attributes (e.g., cls_dropout)
     hf_arch = "cocolm"
-    hf_config = COCOLMConfig.from_pretrained("microsoft/cocolm-base", **config_kwargs)
-    hf_tokenizer = COCOLMTokenizer.from_pretrained("microsoft/cocolm-base", **tokenizer_kwargs)
-    hf_model= COCOLMForSequenceClassification.from_pretrained("microsoft/cocolm-base", config=hf_config, **model_kwargs)
+    hf_config = COCOLMConfig.from_pretrained(model_checkpoint, **config_kwargs)
+    hf_tokenizer = COCOLMTokenizer.from_pretrained(model_checkpoint, **tokenizer_kwargs)
+    hf_model= COCOLMForSequenceClassification.from_pretrained(model_checkpoint, config=hf_config, **model_kwargs)
 
     if new_special_tokens:
         # After adding the new tokens, we need to resize the embedding matrix in the model and initialize the weights

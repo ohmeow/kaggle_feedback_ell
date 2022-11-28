@@ -887,7 +887,7 @@ experiments = {
         # data
         "anchor_col": "anchor",
         "target_col": "target",
-        "max_length": 140,
+        "max_length": 512,
         "include_labels": False,
         "tok_kwargs": {},
         "batch_size": 128,
@@ -896,7 +896,7 @@ experiments = {
         "adam_beta2": 0.999,
         "adam_eps": 1e-5,
         "weight_decay": 0.01,
-        "max_grad_norm": 1.0,
+        "max_grad_norm": None, #1.0,
         "save_best_model": True,
         "use_fp16": True,
         # training
