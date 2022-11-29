@@ -203,7 +203,7 @@ experiments = {
         # data
         "anchor_col": "anchor",
         "target_col": "target",
-        "max_length": 140,
+        "max_length": 512,
         "include_labels": True,
         "tok_kwargs": {},
         "batch_size": 8,
@@ -853,7 +853,7 @@ experiments = {
         # data
         "anchor_col": "anchor",
         "target_col": "target",
-        "max_length": 140,
+        "max_length": 512,
         "include_labels": True,
         "tok_kwargs": {},
         "batch_size": 16,
