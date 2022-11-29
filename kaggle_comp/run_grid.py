@@ -35,6 +35,7 @@ def run_grid(CFG=config.CFG):
     print(grid_df)
     print("")
 
+    print(CFG.random_seed)
     print("Preprocessing and creating folds")
     print("")
     train_df = create_folds.build_folds(
@@ -44,7 +45,7 @@ def run_grid(CFG=config.CFG):
         #strat_feat = CFG.strat_feat,
         preprocess = CFG.preprocess,
         return_file = True,
-        save_file = False
+        save_file = True
         )
 
     # def build_folds(

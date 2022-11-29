@@ -21,7 +21,7 @@ class CFG:
     subset = 1.0
     n_fold = 5
     fold = [0]
-    random_seed = 4321
+    random_seed = 42
     #strat_feat = "section_scores"
     preprocess = "basic"
     postprocess = "none"

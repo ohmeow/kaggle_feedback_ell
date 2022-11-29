@@ -41,7 +41,7 @@ def build_folds(
     # shuffle dataset - optional subset for faster iteration
     train_df = train_df.sample(frac=subset, random_state=seed).reset_index(drop=True)
 
-    skf = MultilabelStratifiedKFold(n_splits=5, shuffle=True, random_state=4321)
+    skf = MultilabelStratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
     for fold, (_, val_index) in enumerate(skf.split(X = train_df, y = train_df[target_cols])):
         train_df.loc[val_index, 'k_fold'] = fold
